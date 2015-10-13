@@ -29,16 +29,15 @@ public class Snake : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-		Debug.Log ("Snake Enter");
-		Destroy (col.gameObject);
-		int newIndex = body.Count;
-		BodyPart lastPart = body [newIndex - 1].GetComponent<BodyPart> ();
-		Debug.Log (lastPart.transform.position);
-		Debug.Log (lastPart.currentDirection);
-		Debug.Log (lastPart.transform.position - DefaultOptions.defaultVelocities[lastPart.currentDirection]);
-		createPart (newIndex, 
+		if (col.transform.tag == "Food") {
+			Debug.Log ("Snake Enter");
+			Destroy (col.gameObject);
+			int newIndex = body.Count;
+			BodyPart lastPart = body [newIndex - 1].GetComponent<BodyPart> ();
+			createPart (newIndex, 
 		            lastPart.currentDirection,
-		            lastPart.transform.position - DefaultOptions.defaultVelocities[lastPart.currentDirection]);
+		            lastPart.transform.position - DefaultOptions.defaultVelocities [lastPart.currentDirection]);
+		}
     }
 
 	/*void OnTriggerExit(Collider col)
