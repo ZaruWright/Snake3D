@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\BodyPart.cs" />
      <Compile Include="Assets\Scripts\DefaultOptions.cs" />
      <Compile Include="Assets\Scripts\Direction.cs" />
+     <Compile Include="Assets\Scripts\RotateAround.cs" />
      <Compile Include="Assets\Scripts\Snake.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
