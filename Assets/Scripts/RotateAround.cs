@@ -6,11 +6,8 @@ public class RotateAround : MonoBehaviour {
 	private Vector3 center;
 	private Vector3 pole;
 	private float radius;
-
-	// 0 < theta < 2pi
-	public float theta;
-	// 0 < fi < pi
-	public float fi;
+    private GameObject sphere;
+    public float rotationVelocity;
 
 	public GameObject objectToRotateAround;
 
@@ -18,35 +15,32 @@ public class RotateAround : MonoBehaviour {
 	void Start () {
 		center = objectToRotateAround.transform.position;
 		pole = transform.position;
-		Debug.Log (center);
-		Debug.Log (pole);
-
 		radius = Mathf.Sqrt( 
 					Mathf.Pow (pole.x - center.x, 2) + 
 					Mathf.Pow (pole.y - center.y, 2) + 
 					Mathf.Pow (pole.z - center.z, 2));
-		Debug.Log ("Center " + center);
-		Debug.Log ("Pole" + pole);
-		Debug.Log ("Radius" + radius);
+        sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sphere.transform.name = "RotateAround";
+        sphere.transform.position = center;
+        sphere.GetComponent<SphereCollider>().radius = radius;
+        Destroy(sphere.GetComponent<MeshRenderer>());
+        transform.parent = sphere.transform;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		Vector3 parametricEcuation = new Vector3(center.x + radius * Mathf.cos(theta) * Mathf.sin(fi),
-												 center.y + radius * Mathf.sin(theta) * Mathf.sin(fi),
-												 center.z + radius * Mathf.cos(fi));
-		if (Input.GetKey(KeyCode.UpArrow)){
-			transform.Translate(DefaultsOptions.defaultVelocities[Direction.Up] + parametricEcuation);
+        
+        if (Input.GetKey(KeyCode.UpArrow)){
+            sphere.transform.Rotate(new Vector3(1f,0f,0f) * Time.deltaTime * rotationVelocity);
 		}
 		else if (Input.GetKey(KeyCode.DownArrow)){
-			transform.Translate(DefaultsOptions.defaultVelocities[Direction.Down] + parametricEcuation);
-		}
+            sphere.transform.Rotate(new Vector3(-1f, 0f, 0f) * Time.deltaTime * rotationVelocity);
+        }
 		else if (Input.GetKey(KeyCode.LeftArrow)){
-			transform.Translate(DefaultsOptions.defaultVelocities[Direction.Left] + parametricEcuation);
-		}
+            sphere.transform.Rotate(new Vector3(0f, 1f, 0f) * Time.deltaTime * rotationVelocity);
+        }
 		else if (Input.GetKey(KeyCode.RightArrow)){
-			transform.Translate(DefaultsOptions.defaultVelocities[Direction.Right] + parametricEcuation);
-		}
+            sphere.transform.Rotate(new Vector3(0f, -1f, 0f) * Time.deltaTime * rotationVelocity);
+        }
 	}
 }

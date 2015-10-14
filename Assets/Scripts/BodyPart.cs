@@ -17,10 +17,10 @@ public class BodyPart : MonoBehaviour {
 	
 	// Move a part of the snake
 	void FixedUpdate () {
-		if (Snake.s_snake.amountTime >= Snake.s_snake.followTime && !updated){	
+		if (Snake.s_snake.amountTime >= Snake.s_snake.followTime /*&& !updated*/){	
 			v3 = DefaultOptions.defaultVelocities[currentDirection];
 			transform.Translate(v3);
-			updated = true;
+			//updated = true;
 		}
 	}
 }

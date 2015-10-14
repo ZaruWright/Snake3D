@@ -56,14 +56,14 @@ public class Snake : MonoBehaviour {
 		if (amountTime >= followTime){
 			for (int i = body.Count; i > 1; --i){
 				body[i - 1].GetComponent<BodyPart>().currentDirection = body[i - 2].GetComponent<BodyPart>().currentDirection;
-				body[i - 1].GetComponent<BodyPart>().updated = false;
+				//body[i - 1].GetComponent<BodyPart>().updated = false;
 
 			}
 			amountTime = 0;
 		}
 
 		Direction currentHeadDirection = body [0].GetComponent<BodyPart> ().currentDirection;
-		body[0].GetComponent<BodyPart>().updated = false;
+		//body[0].GetComponent<BodyPart>().updated = false;
         //Update the head
         if (Input.GetKey(KeyCode.W) && currentHeadDirection != Direction.Down)
         {
